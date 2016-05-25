@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>业务管理</title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/typemanage.js" %}
+    {% script "/js/workmanage.js" %}
+    {% script "/js/publicfunc.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+
+</head>
+<body>
+<div class="easyui-layout"  data-options="fit:true">
+    <p id="status" style="display: none;">{{type}}</p>
+    <div data-options="region:'center'">
+        <table id="workmanagerpanel" >
+            <thead>
+            <tr>
+                <th data-options="field:'wid',width:160,align:'center'">工单编号
+                <th data-options="field:'oldtype',width:100,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    return getfigurename('客户类型',value);
+                }">求助类型</th>
+                <th data-options="field:'dvname',width:100,align:'center'">求助区域</th>
+                <th data-options="field:'oldname',width:100,align:'center'">求助者姓名</th>
+                <th data-options="field:'oldtelnum',width:100,align:'center'">求助者电话</th>
+                <th data-options="field:'wtime',width:140,align:'center',formatter:dateformatter">求助时间</th>
+                <th data-options="field:'ro',width:220,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    var str='<div></div>';
+                    if(rowData.status==0){
+                        str=$(str).append('<button onclick=&quot;pwork(\''+rowData.wid+'\')&quot;>派单</button>'
+                            +'&nbsp;<button onclick=&quot;delW(\''+rowData.wid+'\')&quot;>作废</button>'
+                            +'&nbsp;<button onclick=&quot;detailW(\''+rowData.wid+'\')&quot;>明细</button>'
+                            +'<p class=&quot;hide&quot; id=&quot;t'+rowData.wid+'&quot;>'+JSON.stringify(rowData)+'</p>');
+                    }else if(rowData.status==1){
+                        str=$(str).append('<button onclick=&quot;vwork(\''+rowData.wid+'\')&quot;>回访</button>'
+                            +'&nbsp;<button onclick=&quot;delW(\''+rowData.wid+'\')&quot;>作废</button>'
+                            +'&nbsp;<button onclick=&quot;detailW(\''+rowData.wid+'\')&quot;>明细</button>'
+                            +'&nbsp;<button onclick=&quot;restoreP(\''+rowData.wid+'\')&quot;>还原</button>'
+                            +'<p class=&quot;hide&quot; id=&quot;t'+rowData.wid+'&quot;>'+JSON.stringify(rowData)+'</p>');
+                    }else if(rowData.status==2){
+                        str=$(str).append('<button onclick=&quot;detailW(\''+rowData.wid+'\')&quot;>明细</button>'
+                            /**+'&nbsp;<button onclick=&quot;restoreV(\''+rowData.wid+'\')&quot;>还原</button>'**/
+                            +'<p class=&quot;hide&quot; id=&quot;t'+rowData.wid+'&quot;>'+JSON.stringify(rowData)+'</p>');
+
+                    }
+                    return str.html();
+                }">操作</th>
+                <!--<th data-options="field:'time',width:150,align:'center',formatter:dateformatter,align:'center'">注册时间</th>-->
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div id="workpaneltb" style="padding:5px;height:34px;;vertical-align: middle;line-height: 34px;">
+        <div class="lf">单号: <input class="easyui-textbox wid"  style="width:120px">&nbsp;&nbsp;
+            姓名: <input class="easyui-textbox name"  style="width:120px">&nbsp;&nbsp;
+            电话: <input class="easyui-textbox tel"  style="width:120px">&nbsp;&nbsp;
+            类型: <input class="easyui-textbox type"  style="width:120px">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div class="lf" style="height: 34px"><div class="tbbtn find">搜索</div></div>
+        <div class="rg" style="height: 34px;margin-right: 10px;"><div class="tbbtn add">+添加受理单</div></div>
+        <div class="rg" style="height: 34px;margin-right: 10px;"><div class="tbbtn down">导出Excel</div></div>
+
+        <!--<a class="easyui-linkbutton newuser" >&nbsp;新&nbsp;增&nbsp;</a>-->
+    </div>
+    <div id="pworkwin" class="easyui-dialog" closed="true" title="选择服务商"
+         data-options="width: 480,
+            height: 180,
+            buttons:[{
+                text:'派单',
+                id:'pworkbtn',
+                handler:function(){
+                    $.messager.confirm('选择服务商', '你正在试图派单？', function(r){
+                            if (r){
+                                $('#pworkwin form').form('submit', {
+                                      url:'/pwork',
+                                      onSubmit: function(){
+                                      },
+                                      success:function(data){
+                                          if(data=='&quot;true&quot;'){
+                                              $.messager.alert('操作成功','派单成功!');
+                                              $('#workmanagerpanel').datagrid('reload');
+                                              $('#pworkwin').dialog('close');
+                                          }else{
+                                               $.messager.alert('操作失败','派单失败!');
+                                          }
+                                      }
+                                });
+                            }
+                    });
+                }},{
+                text:'取消',
+                handler:function(){
+                    $('#pworkwin').dialog('close');
+                }}]">
+        <form method="post" style="text-align: center">
+            <br>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <td style="text-align: right">服务类型：</td>
+                    <td>
+                        <input class='easyui-combobox' name='wptid' id="wtid">&nbsp;&nbsp;
+                        <input class='easyui-combobox'  name='wtid' id="tid">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">服务商：</td>
+                    <td><input class='textbox' name='orgname' style='width: 351px;'>
+                        <div class="tfindbox"></div>
+                    </td>
+                </tr>
+            </table>
+            <input style="display: none;" name="wid">
+            <input style="display: none;" name="orgid">
+            <input style="display: none;" name="iid">
+        </form>
+    </div>
+    <div id="vworkwin" class="easyui-dialog" closed="true" title="回访记录"
+         data-options="width: 340,
+            height: 260,
+            buttons:[{
+                text:'保存',
+                id:'pworkbtn',
+                handler:function(){
+                    $.messager.confirm('回访记录', '你正在试图保存回访记录？', function(r){
+                            if (r){
+                                $('#vworkwin form').form('submit', {
+                                      url:'/vwork',
+                                      onSubmit: function(){
+                                      },
+                                      success:function(data){
+                                          if(data=='&quot;true&quot;'){
+                                              $.messager.alert('操作成功','保存回访记录成功!');
+                                              $('#workmanagerpanel').datagrid('reload');
+                                              $('#vworkwin').dialog('close');
+                                          }else{
+                                               $.messager.alert('操作失败','派单失败!');
+                                          }
+                                      }
+                                });
+                            }
+                    });
+                }},{
+                text:'取消',
+                handler:function(){
+                    $('#vworkwin').dialog('close');
+                }}]">
+        <form method="post" style="text-align: center">
+            <br>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <td style="text-align: right">服务时间：</td>
+                    <td>
+                        <input class='easyui-datetimebox' name="asstime">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">服务费用：</td>
+                    <td>
+                        <input class='textbox' name="price">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">回访记录：</td>
+                    <td><input class='easyui-textbox' name='visitcontent'>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">评价：</td>
+                    <td><input class='textbox' name='evaluate'>
+                    </td>
+                </tr>
+            </table>
+            <input style="display: none;" name="wid">
+            <input style="display: none;" name="oldid">
+        </form>
+    </div>
+</div>
+</body>
+</html>

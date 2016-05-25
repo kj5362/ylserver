@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>添加受理单</title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/typemanage.js" %}
+    {% script "/js/divisionmanage.js" %}
+    {% script "/js/workmanage.js" %}
+    {% script "/js/publicfunc.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+
+</head>
+<body>
+<div class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'center'">
+        <div class="work_header"><div class="addwork">添加受理单</div></div>
+        <p id="wid" style="display: none;">{{id}}</p>
+        <p id="type" style="display: none;">{{type}}</p>
+        <p id="name" style="display: none;">{{username}}</p>
+
+        <form>
+            <table  style="margin-top: 70px;" class="info"  border="0">
+                <tr style="height: 34px">
+                    <td style="width: 80px;">工单号：</td><td><input class="textbox" name="wid" readonly="true"></td>
+                    <td style="width: 80px;">求助者姓名：</td><td><input class="textbox" name="oldname" readonly="true"></td>
+                    <td style="width: 80px;">&nbsp;</td><td><div class="tbbtn history rg">历史求助</div></td>
+                    <td style="width: 20px">&nbsp;</td>
+                </tr>
+                <tr style="height: 34px">
+                    <td style="width: 80px;">求助者电话：</td>
+                    <td>
+                        <input class="textbox" name="oldtelnum"  id="tel">
+                        <div class="findbox"></div>
+                    </td>
+                    <td style="width: 80px;">求助者类型：</td><td><input class="easyui-combobox" name="oldtype" readonly="true" id="oldtype"></td>
+                    <!--<td style="width: 80px;">求助者区域：</td><td><input class="textbox" name="dvcode" readonly="true"></td>-->
+                    <td style="width: 20px" colspan="3">&nbsp;</td>
+                </tr>
+                <tr style="height: 34px">
+                    <td style="width: 80px;">预约时间：</td><td><input class="easyui-datetimebox" name="ordertime"></td>
+                    <td style="width: 80px;">求助时间：</td><td><input class="easyui-datetimebox" name="wtime" id="time"></td>
+                    <td style="width: 80px;">紧急程度：</td><td><input class="easyui-combobox" name="urgent" id="urgent"></td>
+                    <td style="width: 20px">&nbsp;</td>
+                </tr>
+                <tr style="height: 34px">
+                    <td style="width: 80px;">服务地址：</td>
+                    <td colspan="5" class="address">
+                        <input class="easyui-combobox" name="addsh" id="addsh">&nbsp;
+                        <input class="easyui-combobox" name="adds" id="adds">&nbsp;
+                        <input class="easyui-combobox" name="addx" id="addx">&nbsp;
+                        <input class="easyui-combobox" name="addjd" id="addjd">&nbsp;&nbsp;
+                        <input class="textbox" style="width: 182px" name="waddress"></td>
+                    <td style="width: 20px">&nbsp;</td>
+                </tr>
+                <tr style="height:50px">
+                    <td style="width: 80px;">求助内容：</td>
+                    <td colspan="5">
+                        <input class="easyui-textbox" data-options="multiline:true" style="width: 589px;height: 50px" name="wcontent">
+                    </td>
+                    <td style="width: 20px">&nbsp;</td>
+                </tr>
+                <tr style="height: 34px;display: none">
+                    <td style="width: 80px;">服务大类：</td><td><input class="easyui-combobox" name="wptid"  id="wtid"></td>
+                    <td style="width: 80px;">服务类型：</td><td><input class="easyui-combobox" name="wtid"  id="tid"></td>
+                    <td style="width: 80px;">服务商：</td><td><input class="textbox" name="orgname" ></td>
+                    <td style="width: 20px">&nbsp;</td>
+                </tr>
+                <tr style="height: 34px;display: none">
+                    <td style="width: 80px;">服务时间：</td><td><input class="textbox" name="asstime"></td>
+                    <td style="width: 80px;">服务费用：</td><td><input class="textbox" name="price"></td>
+                    <td style="width: 80px;">回访时间：</td><td><input class="textbox" name="visittime"></td>
+                    <td style="width: 20px">&nbsp;</td>
+                </tr>
+                <tr style="height: 34px;display: none">
+                    <td style="width: 80px;">回访内容：</td>
+                    <td colspan="5">
+                        <input class="easyui-textbox" data-options="multiline:true" style="width: 589px;height: 50px"
+                               name="visitcontent" ></td>
+                    <td style="width: 20px">&nbsp;</td>
+                </tr>
+                <tr style="height: 34px;display: none">
+                    <td style="width: 80px;">评价：</td><td colspan="5"><input class="easyui-textbox" name="evaluate" ></td>
+                    <td style="width: 20px">&nbsp;</td>
+                </tr>
+                <tr style="height: 34px;display: none">
+                    <td style="width: 80px;">受理时间：</td><td><input class="textbox" name="acceptime" ></td>
+                    <td style="width: 80px;">受理员姓名：</td><td ><input class="textbox" name="accepname" ></td>
+                    <td style="width: 20px">&nbsp;</td>
+                </tr>
+            </table>
+            <input style="display: none" name="oldid">
+            <input style="display: none" name="userid">
+        </form>
+
+        <div class="workbtns"><div class="workbtn lf">添加受理单</div><div class="workbtn rg">取消</div></div>
+    </div>
+</div>
+</body>
+</html>

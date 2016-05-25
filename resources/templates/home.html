@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>呼叫中心</title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/home.js" %}
+    {% style "/js/easyui/themes/bootstrap/easyui.css" %}
+    {% style "/css/main.css" %}
+</head>
+<body>
+<div class="easyui-layout" style="width: 100%;height: 100%;min-width: 1344px;">
+    <div data-options="region:'north'" border="2" style="background-color: #0C88D6">
+        <div class="logo_lf"> <div  class="logo"><img src="../img/logo.png"><span style="margin-left: 20px">呼叫中心系统</span></div></div>
+        <div class="logo_rg">
+            <div class="lf">你好：{{username}}</div>
+            <div class="lf" style="width: 20px;height: 80px;"></div>
+            <div class="rg">
+                <table border="0" cellpadding="0" cellspacing="0" style="height: 80px">
+                    <tr>
+                        <td>
+                            <div class="logo_btn "><img src="../img/ic/ic_set.png"><span>设置</span></div>
+                        </td>
+                        <td style="width: 20px;">&nbsp;</td>
+                        <td>
+                            <div class="logo_btn" onclick="logout()"><img src="../img/ic/ic_exit.png"><span>退出</span></div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'west'" border="false" style="width: 200px;">
+        <div class="easyui-layout" fit="true">
+            <div data-options="region:'north'" border="false" class="home">首页</div>
+            <div data-options="region:'center'" border="false" id="menu"></div>
+        </div>
+
+    </div>
+    <!--<div data-options="region:'south'" border="false"  class="footer">-->
+        <!--<span>技术支持：浙江海予信息科技有限公司</span><span style="margin-left: 40px;margin-right: 40px">公司官网：www.hvit.com</span></div>-->
+    <div data-options="region:'center'" border="false" style="overflow: hidden">
+        <iframe style="width: 100%;height: 100%;" frameBorder=0></iframe>
+    </div>
+</div>
+</body>
+</html>
+

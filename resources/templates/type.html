@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/typemanage.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+</head>
+<body>
+<div id="typemanagerlayout" class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'center'">
+        <table id="typemanagerpanel" >
+            <thead>
+            <tr>
+                <th data-options="field:'text',width:300,formatter:function(val,rowData,rowIndex){
+                     var signaturepath=rowData.signaturepath;
+                     return '<span signaturepath=&quot;'+signaturepath+'&quot; class=&quot;treefunc&quot;>' + val + '</span>';
+                }">服务配置</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div data-options="region:'east',split:true,collapsed:true" title="详细信息" style="width:300px;">
+        <div style="padding:10px 10px 10px 10px;">
+            <form id="typeinfoform" method="post">
+                <table class="formtable" style="width: 100%;">
+                    <!--<tr>-->
+                        <!--<td>服务编码:</td>-->
+                        <!--<td><input class="easyui-textbox"  type="text" name="tid" data-options="required:true"></td>-->
+                    <!--</tr>-->
+                    <tr>
+                        <td>服务内容:</td>
+                        <td><input class="easyui-textbox" type="text" name="tname" data-options="required:true"></td>
+                    </tr>
+                    <!--<tr>-->
+                        <!--<td>服务级别:</td>-->
+                        <!--<td>-->
+                            <!--<input class="easyui-textbox" name="depth" >-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    </tr>
+                    <tr style="display: none;">
+                        <td>
+                            <input type="text" name="tid" style="display: none;">
+                            <input type="text" name="parentid" style="display: none;">
+                            <input type="text" name="dvcode" style="display: none;">
+                            <input class="text" name="depth" style="display: none;">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div style="text-align:center;padding:5px" id="typeformbtns">
+             <span class="hide"><a  class="easyui-linkbutton save">保存</a>
+            <!--<a  class="easyui-linkbutton del">删除</a>-->
+            <a  class="easyui-linkbutton new"  >新增</a></span>
+        </div>
+    </div>
+    <!--<div id="typepaneltb" style="padding:5px;height:34px;;vertical-align: middle;line-height: 34px;">-->
+        <!--<div class="lf">-->
+            <!--选择区划：<input class="easyui-combobox" name="addsh" id="addsh">&nbsp;-->
+            <!--<input class="easyui-combobox" name="adds" id="adds">&nbsp;-->
+            <!--<input class="easyui-combobox" name="addx" id="addx">&nbsp;-->
+            <!--<input class="easyui-combobox" name="addjd" id="addjd">&nbsp;&nbsp;&nbsp;&nbsp;-->
+            <!--<input style="display: none;" id="dvcode">-->
+        <!--</div>-->
+        <!--<div class="lf" style="height: 34px">-->
+            <!--<div class="tbbtn find">搜索</div>-->
+        <!--</div>-->
+        <!--<div class="lf" style="width: 20px;height: 34px">-->
+        <!--</div>-->
+        <!--<div class="rg" style="height: 34px">-->
+            <!--<div class="tbbtn add">+新增服务类型</div>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+</body>
+</html>

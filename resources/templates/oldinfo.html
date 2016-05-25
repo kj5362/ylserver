@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新增服务商</title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/divisionmanage.js" %}
+    {% script "/js/typemanage.js" %}
+    {% script "/js/oldmanage.js" %}
+    {% script "/js/publicfunc.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+
+</head>
+<body>
+<div class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'north'"  class="org_header">
+        <div class="addorg">客户信息</div>
+    </div>
+    <p id="type" style="display: none;">{{type}}</p>
+    <div data-options="region:'center'" border="false">
+
+        <div style="margin: 0 auto;width: 700px;">
+            <form class="form1">
+                <table class="info"  border="0" style="background-color: #ebebeb;margin-top: 80px;">
+                    <tr style="height: 10px">
+                        <td colspan="7">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">姓名：</td><td><input class="textbox" name="oldname" ></td>
+                        <td style="width: 80px;">性别：</td><td><input class="textbox" name="oldsex"></td>
+                        <td style="width: 80px;">出生日期：</td><td><input class="textbox" name="oldbirthday"></td>
+                        <td style="width: 20px">&nbsp;</td>
+
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">身份证：</td><td><input class="textbox" name="oldcardnum" ></td>
+                        <td style="width: 80px;">联系电话：</td><td><input class="textbox" name="oldtelnum"></td>
+                        <td style="width: 80px;">籍贯：</td><td><input class="textbox" name="hometown"></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">户籍所在地：</td><td><input class="textbox" name="domicileplace"></td>
+                        <td style="width: 80px;">民族：</td><td><input class="textbox" name="nation"></td>
+                        <td style="width: 80px;">政治面貌：</td><td><input class="textbox" name="political"></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">文化程度：</td><td><input class="textbox" name="education"></td>
+                        <td style="width: 80px;">身高：</td><td><input class="textbox" name="oldheight"></td>
+                        <td style="width: 80px;">体重：</td><td><input class="textbox" name="oldweight"></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">婚姻状况：</td><td><input class="textbox" name="marriage"></td>
+                        <td style="width: 80px;">是否残疾：</td><td><input class="textbox" name="disability"></td>
+                        <td style="width: 80px;">居住状态：</td><td><input class="textbox" name="living"></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">客户类型：</td><td><input class="textbox" name="oldtype" id="oldtype"></td>
+                        <td style="width: 80px;">入库时间：</td><td><input class="textbox" name="oldtime"></td>
+                        <td style="width: 80px;">备注：</td><td><input class="textbox" name="oldremark"></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">每月补助金：</td><td><input class="textbox" name="subsidymoney" ></td>
+                        <td style="width: 80px;">余额：</td><td><input class="textbox" name="surplusmoney"></td>
+                        <td colspan="2"><div class="rg">经度：<input class="textbox" name="lon" style="width: 88px"></div></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">联系地址：</td>
+                        <td colspan="5" class="address">
+                            <div class="lf"><input class="easyui-combobox" id="addsh">&nbsp;
+                                <input class="easyui-combobox" id="adds">&nbsp;
+                                <input class="easyui-combobox" id="addx">&nbsp;
+                                <input class="easyui-combobox" name="dvcode" id="addjd">&nbsp;&nbsp;</div>
+                            <div class="rg">纬度：<input class="textbox" name="lon"></div></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 80px;">&nbsp;</td>
+                        <td colspan="5">
+                            <div class="lf"><input class="textbox" style="width: 383px" name="oldaddress"></div>
+                            <div class="infobtn earth rg">地图位置</div></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 10px">
+                        <td colspan="7">&nbsp;</td>
+                    </tr>
+                </table>
+            </form>
+            <form class="form2">
+                <div style="color: #ff6262;padding-left: 20px;font-size: 16px;margin-top: 20px;">*紧急联系人</div>
+                <table style="width: 100%">
+                    <tr>
+                        <td>
+                            <div id="lxs" style="width: 560px;">
+                            </div>
+                        </td>
+                        <td style="width: 140px"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

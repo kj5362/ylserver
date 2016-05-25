@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>业务管理</title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/orgmanage.js" %}
+    {% script "/js/publicfunc.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+
+</head>
+<body>
+<div class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'center'">
+        <table id="orgmanagerpanel" >
+            <thead>
+            <tr>
+                <th data-options="field:'orgid',width:100,align:'center'">服务商编号
+                <th data-options="field:'orgname',width:100,align:'center'">服务商名称</th>
+                <th data-options="field:'orgtelnum',width:100,align:'center'">联系电话</th>
+                <th data-options="field:'orgservice',width:270,align:'center'">服务范围</th>
+                <th data-options="field:'orgtime',width:140,align:'center',formatter:dateformatter">注册时间</th>
+                <!--<th data-options="field:'usertel',width:100,align:'center'">求助时间</th>-->
+                <th data-options="field:'ro',width:180,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    var str='<div></div>';
+                    str=$(str).append('<button onclick=&quot;updateO('+rowData.orgid+')&quot;>查看</button>'
+                    +'&nbsp;<button onclick=&quot;delO('+rowData.orgid+')&quot;>删除</button>'
+                    +'<p class=&quot;hide&quot; id=&quot;t'+rowData.orgid+'&quot;>'+JSON.stringify(rowData)+'</p>');
+                    return str.html();
+                }">操作</th>
+                <!--<th data-options="field:'time',width:150,align:'center',formatter:dateformatter,align:'center'">注册时间</th>-->
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div id="orgpaneltb" style="padding:5px;height:34px;;vertical-align: middle;line-height: 34px;">
+        <div class="lf">编号: <input class="easyui-textbox keyword"  style="width:120px">&nbsp;&nbsp;
+            名称: <input class="easyui-textbox name"  style="width:120px">&nbsp;&nbsp;
+            服务范围: <input class="easyui-textbox service"  style="width:120px">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div class="lf" style="height: 34px"><div class="tbbtn find">搜索</div></div>
+        <div class="rg" style="height: 34px;margin-right: 10px;"><div class="tbbtn add">+新增服务商</div></div>
+    </div>
+</div>
+</body>
+</html>

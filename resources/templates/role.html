@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/jquery.json-2.4.js" %}
+    {% script "/js/rolemanage.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+</head>
+<body>
+<div id="rolemanagerlayout" class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'center'">
+        <table id="rolemanagerpanel" >
+            <thead>
+            <tr>
+                <th data-options="field:'rolename',width:100,align:'center'">角色名</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div data-options="region:'east',split:true,collapsed:true" title="详细信息" style="width:300px;">
+        <div style="padding:10px 0 10px 60px;display:none;">
+            <form id="roleinfoform" method="post">
+                <table>
+                    <tr>
+                        <td>功能名:</td>
+                        <td><input class="easyui-validatebox" type="text" name="rolename" data-options="required:true"></td>
+                    </tr>
+                    <tr><td>
+                        <input type="text" name="roleid" style="display: none;">
+                    </td></tr>
+                </table>
+            </form>
+        </div>
+        <ul id="rolefuncgrid"></ul>
+        <div style="text-align:center;padding:5px" id="roleformbtns">
+            <span class="hide"><a  class="easyui-linkbutton save">保存</a>
+            <a  class="easyui-linkbutton del">删除</a></span>
+        </div>
+    </div>
+    <div id="rolepaneltb" style="padding:5px;height:auto;vertical-align: middle;">
+        <a>快速搜索: <input class="easyui-textbox keyword"  style="width:120px"></a>&nbsp;
+        <a class="easyui-linkbutton findrole" >&nbsp;查&nbsp;询&nbsp;</a>&nbsp;
+        <a class="easyui-linkbutton newrole" >&nbsp;新&nbsp;增&nbsp;</a>
+    </div>
+    <div id="newrolewin" class="easyui-dialog" closed="true" title="新增角色窗口"
+         data-options="width: 300,
+            height: 140,
+            cache: false,
+            buttons:[{
+                text:'保存',
+                id:'savenewrolebtn',
+                disabled:true,
+                handler:function(){
+                    var jq = top.jQuery;
+                    $.messager.confirm('确定要新增角色么?', '你正在试图新增角色?', function(r){
+                            if (r){
+                                $('#newrolewin form').form('submit', {
+                                      url:'/addrole',
+                                      onSubmit: function(){
+                                      },
+                                      success:function(){
+                                          $.messager.alert('操作成功','新增角色成功!');
+                                          $('#rolemanagerpanel').datagrid('reload');
+                                          $('#newrolewin').dialog('close');
+                                      }
+                                });
+                            }
+                    });
+                }},{
+                text:'取消',
+                handler:function(){
+                    $('#newrolewin').dialog('close');
+                }}]">
+        <form method="post">
+            <table>
+                <tr>
+                    <td>角色名:</td>
+                    <td><input class="easyui-validatebox textbox"  name="rolename" data-options="required:true"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>用户管理</title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/publicfunc.js" %}
+    {% script "/js/divisionmanage.js" %}
+    {% script "/js/usermanage.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+</head>
+<body>
+<div id="usermanagerlayout" class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'center'">
+        <table id="usermanagerpanel" >
+            <thead>
+            <tr>
+                <th data-options="field:'username',width:100,align:'center'">用户名
+                <th data-options="field:'useraccount',width:100,align:'center'">登录名</th>
+                <th data-options="field:'rolename',width:100,align:'center'">角色</th>
+                <th data-options="field:'usertelnum',width:100,align:'center'">联系方式</th>
+                <th data-options="field:'useraddress',width:100,align:'center'">联系地址</th>
+                <th data-options="field:'dvname',width:100,align:'center'">所属区划</th>
+                <th data-options="field:'usertime',width:140,align:'center',formatter:dateformatter">创建时间</th>
+                <th data-options="field:'ro',width:180,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    var str='<div></div>';
+                    str=$(str).append('<button onclick=&quot;updateP('+rowData.userid+')&quot;>变更</button>'
+                    +'&nbsp;<button onclick=&quot;delP('+rowData.userid+')&quot;>删除</button>'
+                    +'<p class=&quot;hide&quot; id=&quot;t'+rowData.userid+'&quot;>'+JSON.stringify(rowData)+'</p>');
+                    return str.html();
+                }">操作</th>
+                <!--<th data-options="field:'time',width:150,align:'center',formatter:dateformatter,align:'center'">注册时间</th>-->
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div id="userpaneltb" style="padding:5px;height:auto;vertical-align: middle;">
+        快速搜索: <input class="easyui-textbox keyword"  style="width:120px">&nbsp;
+        <!--小组名称:<input class="easyui-combobox group" style="width:120px" id="groupname">&nbsp;-->
+        <a class="easyui-linkbutton finduser" >&nbsp;查&nbsp;询&nbsp;</a>&nbsp;
+        <a class="easyui-linkbutton newuser" >&nbsp;新&nbsp;增&nbsp;</a>
+    </div>
+    <div id="newuserwin" class="easyui-dialog" closed="true" title="新增用户窗口"
+         data-options="width: 300,
+            height: 290,
+            buttons:[{
+                text:'保存',
+                id:'saveuserbtn',
+                disabled:true,
+                handler:function(){
+                    $.messager.confirm('确定要新增用户么?', '你正在试图新增用户?', function(r){
+                            if (r){
+                                $('#newuserwin form').form('submit', {
+                                      url:'/adduser',
+                                      onSubmit: function(){
+                                      },
+                                      success:function(){
+                                          $.messager.alert('操作成功','新增用户成功!');
+                                          $('#usermanagerpanel').datagrid('reload');
+                                          $('#newuserwin').dialog('close');
+                                      }
+                                });
+                            }
+                    });
+                }},{
+                text:'变更',
+                id:'updateuserbtn',
+                disabled:true,
+                handler:function(){
+                    $.messager.confirm('确定要变更用户信息么?', '你正在试图变更用户信息?', function(r){
+                            if (r){
+                                $('#newuserwin form').form('submit', {
+                                      url:'/updateuser',
+                                      onSubmit: function(){
+                                      },
+                                      success:function(){
+                                          $.messager.alert('操作成功','变更用户信息成功!');
+                                          $('#usermanagerpanel').datagrid('reload');
+                                          $('#newuserwin').dialog('close');
+                                      }
+                                });
+                            }
+                    });
+                }},{
+                text:'取消',
+                handler:function(){
+                    $('#newuserwin').dialog('close');
+                }}]">
+        <form method="post" style="margin:10px auto">
+            <table>
+                <tr>
+                    <td>登陆名:</td>
+                    <td><input class="easyui-validatebox textbox"  name="useraccount" data-options="required:true"></td>
+                </tr>
+                <tr>
+                    <td>用户名:</td>
+                    <td><input class="easyui-validatebox textbox"  name="username" data-options="required:true"></td>
+                </tr>
+                <tr>
+                    <td>密码:</td>
+                    <td><input class="easyui-validatebox textbox" type="password" name="pwd" data-options="required:true" ></td>
+                </tr>
+                <tr>
+                    <td>联系电话:</td>
+                    <td><input class="easyui-validatebox textbox"  name="usertelnum" data-options="required:true" ></td>
+                </tr>
+                <tr>
+                    <td>联系地址:</td>
+                    <td><input class="easyui-validatebox textbox"  name="useraddress" data-options="required:true" ></td>
+                </tr>
+                <tr>
+                    <td>所属区划:</td>
+                    <td><input class="easyui-combotree" style="width: 173px" name="dvcode" id="dvcode" ></td>
+                </tr>
+                <tr>
+                    <td>所属角色:</td>
+                    <td><input class="easyui-combobox" name="roleid" id="role"></td>
+                </tr>
+            </table>
+            <input type="hidden" name="userid">
+        </form>
+    </div>
+</div>
+</body>
+</html>

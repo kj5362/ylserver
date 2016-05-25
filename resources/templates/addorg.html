@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新增服务商</title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/divisionmanage.js" %}
+    {% script "/js/orgmanage.js" %}
+    {% script "/js/publicfunc.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+
+</head>
+<body>
+<div class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'north'"  class="org_header">
+        <div class="addorg">新增服务商</div>
+    </div>
+    <div data-options="region:'center'" border="false">
+
+        <div style="margin: 0 auto;width: 700px;">
+            <form class="form1">
+                <!--<table class="info" cellpacing="5" border="0" style="background-color: #ebebeb;margin-top: 70px;">-->
+                    <!--<tr style="height: 34px">-->
+                        <!--<td style="width: 80px;">机构类型：</td><td><input class="textbox" name="wid"></td>-->
+                        <!--<td style="width: 80px;">编号：</td><td><input class="textbox" name="oldname"></td>-->
+                        <!--<td style="width: 80px;">&nbsp;</td><td style="width: 140px">&nbsp;</td>-->
+                    <!--</tr>-->
+                <!--</table>-->
+                <table class="info"  border="0" style="background-color: #ebebeb;margin-top: 80px;">
+                    <tr style="height: 10px">
+                        <td colspan="7">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">机构类型：</td><td><input class="easyui-combobox" name="orgtype" id="orgtype"></td>
+                        <td style="width: 80px;">服务商名称：</td><td><input class="textbox" name="orgname"></td>
+                        <td style="width: 80px;">联系电话：</td><td><input class="textbox" name="orgtelnum"></td>
+                        <td style="width: 20px">&nbsp;</td>
+
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">法人代表：</td><td><input class="textbox" name="orgperson"></td>
+
+                        <td style="width: 80px;">服务内容：</td>
+                        <td style="width: 140px" colspan="3"><input class="textbox" name="orgservice" style="width: 358px"></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">联系地址：</td>
+                        <td colspan="5" class="address">
+                            <input class="easyui-combobox" id="addsh">&nbsp;
+                            <input class="easyui-combobox" id="adds">&nbsp;
+                            <input class="easyui-combobox" id="addx">&nbsp;
+                            <input class="easyui-combobox" name="dvcode" id="addjd">&nbsp;&nbsp;
+                            <input class="textbox" style="width: 179.5px" name="orgaddress"></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 80px;">成立时间：</td><td><input class="easyui-datebox" name="orgcreatetime"></td>
+                        <td style="width: 80px;">经度：</td>
+                        <td colspan="3" class="address">
+                            <div class="lf"><input class="textbox" name="lon">&nbsp;
+                                纬度：<input class="textbox" name="lat">&nbsp;</div>
+                            <div class="infobtn earth rg">地图位置</div></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 10px">
+                        <td colspan="7">&nbsp;</td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+    <div data-options="region:'south'" border="false" class="submitbtns"><div class="submitbtn">保存</div></div>
+</div>
+</body>
+</html>

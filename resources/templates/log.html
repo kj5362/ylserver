@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/logmanage.js" %}
+    {% script "/js/publicfunc.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+</head>
+<body>
+<div id="logmanagerlayout" class="easyui-layout" style="width:100%;height:100%;" data-options="fit:true">
+    <div data-options="region:'center'">
+        <table id="logmanagerpanel" >
+            <thead>
+            <tr>
+                <th data-options="field:'logcontent',width:200,align:'center'">日志内容</th>
+                <th data-options="field:'username',width:100,align:'center'">操作用户</th>
+                <th data-options="field:'logtime',width:200,formatter:dateformatter,align:'center'">操作时间</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div id="logpaneltb" style="padding:5px;height:auto;vertical-align: middle;">
+        <a>快速搜索: <input class="easyui-textbox keyword"  style="width:120px"></a>&nbsp;
+        <input class="easyui-datetimebox bgtime" style="width:100px;">
+        <input class="easyui-datetimebox edtime" style="width:100px;">
+        <a class="easyui-linkbutton findlog" >&nbsp;查&nbsp;询&nbsp;</a>&nbsp;
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/funcmanage.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+</head>
+<body>
+<div id="funcmanagerlayout" class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'center'">
+        <table id="funcmanagerpanel" >
+            <thead>
+            <tr>
+                <th data-options="field:'text',width:300,formatter:function(val,rowData,rowIndex){
+                     var signaturepath=rowData.signaturepath;
+                     return '<span signaturepath=&quot;'+signaturepath+'&quot; class=&quot;treefunc&quot;>' + val + '</span>';
+                }">功能树</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div data-options="region:'east',split:true,collapsed:true" title="详细信息" style="width:300px;">
+        <div style="padding:10px 10px 10px 10px;">
+            <form id="funcinfoform" method="post">
+                <table class="formtable" style="width: 100%;">
+                    <tr>
+                        <td>功能名称:</td>
+                        <td><input class="easyui-textbox"  type="text" name="funcname" data-options="required:true"></td>
+                    </tr>
+                    <tr>
+                        <td>功能标识:</td>
+                        <td>
+                            <input class="easyui-textbox" name="label" >
+                        </td>
+                    </tr>
+                    <!--<tr>-->
+                        <!--<td>图标样式:</td>-->
+                        <!--<td>-->
+                            <!--<input class="easyui-textbox" data-options="multiline:true"  style="width:100%;height: 80px;" name="imgcss">-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <tr>
+                        <td>排列序号:</td>
+                        <td>
+                            <input class="easyui-textbox" name="sortnum" >
+                        </td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>
+                            <input type="text" name="funcid" style="display: none;">
+                            <input type="text" name="pid" style="display: none;">
+                            <!--<input type="text" name="value" style="display: none;">-->
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div style="text-align:center;padding:5px" id="funcformbtns">
+             <span class="hide"><a  class="easyui-linkbutton save">保存</a>
+            <a  class="easyui-linkbutton del">删除</a>
+            <a  class="easyui-linkbutton new"  >新增</a></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

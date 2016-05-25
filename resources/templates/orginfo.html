@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新增服务商</title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/divisionmanage.js" %}
+    {% script "/js/typemanage.js" %}
+    {% script "/js/orgmanage.js" %}
+    {% script "/js/publicfunc.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+
+</head>
+<body>
+<div class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'north'"  class="org_header">
+        <div class="addorg">服务商信息</div>
+    </div>
+    <p id="type" style="display: none;">{{type}}</p>
+    <div data-options="region:'center'" border="false">
+
+        <div style="margin: 0 auto;width: 700px;">
+            <form class="form1">
+                <!--<table class="info" cellpacing="5" border="0" style="background-color: #ebebeb;margin-top: 70px;">-->
+                <!--<tr style="height: 34px">-->
+                <!--<td style="width: 80px;">机构类型：</td><td><input class="textbox" name="wid"></td>-->
+                <!--<td style="width: 80px;">编号：</td><td><input class="textbox" name="oldname"></td>-->
+                <!--<td style="width: 80px;">&nbsp;</td><td style="width: 140px">&nbsp;</td>-->
+                <!--</tr>-->
+                <!--</table>-->
+                <table class="info"  border="0" style="background-color: #ebebeb;margin-top: 80px;">
+                    <tr style="height: 10px">
+                        <td colspan="7">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">机构类型：</td><td><input class="easyui-combobox" name="orgtype" id="orgtype"></td>
+                        <td style="width: 80px;">服务商名称：</td><td><input class="textbox" name="orgname"></td>
+                        <td style="width: 80px;">联系电话：</td><td><input class="textbox" name="orgtelnum"></td>
+                        <td style="width: 20px">&nbsp;</td>
+
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">法人代表：</td><td><input class="textbox" name="orgperson"></td>
+
+                        <td style="width: 80px;">服务内容：</td>
+                        <td style="width: 140px" colspan="3"><input class="textbox" name="orgservice" style="width: 358px"></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 34px">
+                        <td style="width: 80px;">联系地址：</td>
+                        <td colspan="5" class="address">
+                            <input class="easyui-combobox" id="addsh">&nbsp;
+                            <input class="easyui-combobox" id="adds">&nbsp;
+                            <input class="easyui-combobox" id="addx">&nbsp;
+                            <input class="easyui-combobox" name="dvcode" id="addjd">&nbsp;&nbsp;
+                            <input class="textbox" style="width: 179.5px" name="orgaddress"></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 80px;">成立时间：</td><td><input class="easyui-datebox" name="orgcreatetime"></td>
+                        <td style="width: 80px;">经度：</td>
+                        <td colspan="3" class="address">
+                            <div class="lf"><input class="textbox" name="lon">&nbsp;
+                                纬度：<input class="textbox" name="lat">&nbsp;</div>
+                            <div class="infobtn earth rg">地图位置</div></td>
+                        <td style="width: 20px">&nbsp;</td>
+                    </tr>
+                    <tr style="height: 10px">
+                        <td colspan="7">&nbsp;</td>
+                    </tr>
+                    <input style="display: none;" name="orgid" id="org1">
+                </table>
+            </form>
+            <form class="form2">
+                <div style="color: #ff6262;padding-left: 20px;font-size: 16px;margin-top: 20px;">*相关证件</div>
+                <table style="width: 100%">
+                    <tr>
+                        <td>
+                            <div id="zjs" style="width: 560px;">
+                            </div>
+                        </td>
+                        <td style="width: 140px"><div class="infobtn upload rg">上传附件</div></td>
+                    </tr>
+                </table>
+            </form>
+            <form class="form3">
+                <div style="color: #ff6262;padding-left: 20px;font-size: 16px;margin-top: 20px;">*服务范围</div>
+                <table style="width: 100%">
+                    <tr>
+                        <td><div id="items" style="width: 560px;"></div></td>
+                        <td style="width: 140px"><div class="infobtn additem rg">新增服务</div></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+    <div data-options="region:'south'" border="false" class="submitbtns"><div class="submitbtn">保存</div></div>
+    <div id="uploadwin" class="easyui-dialog" closed="true" title="上传附件"
+          data-options="width: 300,
+            height: 220,
+            buttons:[{
+                text:'上传',
+                id:'uploadbtn',
+                handler:function(){
+                    $.messager.confirm('上传附件', '你正在试图上传附件？', function(r){
+                            if (r){
+                                $('#uploadwin form').form('submit', {
+                                      url:'/upload',
+                                      onSubmit: function(){
+                                      },
+                                      success:function(data){
+                                          if(data=='&quot;true&quot;'){
+                                              $.messager.alert('操作成功','上传成功!');
+                                              getFile();
+                                              $('#uploadwin').dialog('close');
+                                          }else{
+                                              $.messager.alert('操作失败','上传失败!');
+                                          }
+                                      }
+                                });
+                            }
+                    });
+                }},{
+                text:'取消',
+                handler:function(){
+                    $('#uploadwin').dialog('close');
+                }}]">
+        <form method="post" style="text-align: center" class="formf" enctype="multipart/form-data">
+            <br>
+            <p><input class="easyui-filebox "  style="width: 250px;" name="file" ></p>
+            <input style="display: none;" name="orgid">
+        </form>
+    </div>
+    <div id="itemwin" class="easyui-dialog" closed="true" title="服务项信息"
+         data-options="width: 580,
+            height: 180,
+            buttons:[{
+                text:'新增',
+                id:'additembtn',
+                disabled:true,
+                handler:function(){
+                    $.messager.confirm('新增服务项', '你正在试图新增服务项？', function(r){
+                            if (r){
+                                $('#itemwin form').form('submit', {
+                                      url:'/additem',
+                                      onSubmit: function(){
+                                      },
+                                      success:function(data){
+                                          if(data=='&quot;true&quot;'){
+                                              $.messager.alert('操作成功','新增成功!');
+                                              getItem();
+                                              $('#itemwin').dialog('close');
+                                          }else{
+                                              $.messager.alert('操作失败','新增失败!');
+                                          }
+                                      }
+                                });
+                            }
+                    });
+                }},{
+                text:'修改',
+                id:'updateitembtn',
+                disabled:true,
+                handler:function(){
+                    $.messager.confirm('修改服务项', '你正在试图修改服务项？', function(r){
+                            if (r){
+                                $('#itemwin form').form('submit', {
+                                      url:'/updateitem',
+                                      onSubmit: function(){
+                                      },
+                                      success:function(data){
+                                          if(data=='&quot;true&quot;'){
+                                              $.messager.alert('操作成功','修改成功!');
+                                              getItem();
+                                              $('#itemwin').dialog('close');
+                                          }else{
+                                              $.messager.alert('操作失败','修改失败!');
+                                          }
+                                      }
+                                });
+                            }
+                    });
+                }},{
+                text:'取消',
+                handler:function(){
+                    $('#itemwin').dialog('close');
+                }}]">
+        <form method="post" style="text-align: center">
+            <br>
+            <table>
+                <tr>
+                    <td>服务类型：</td>
+                    <td>
+                        <input class='easyui-combobox' id="wtid">&nbsp;&nbsp;
+                        <input class='easyui-combobox'  name='tid' id="tid">&nbsp;&nbsp;&nbsp;&nbsp;
+                        服务价格：<input class='textbox' name='price'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>服务内容：</td>
+                    <td><input class='textbox' name='icontent' style='width: 486px;'>
+                    </td>
+                </tr>
+            </table>
+            <input style="display: none;" name="orgid">   .
+            <input style="display: none;" name="iid">
+        </form>
+    </div>
+</div>
+</body>
+</html>

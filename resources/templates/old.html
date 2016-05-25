@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>业务管理</title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/oldmanage.js" %}
+    {% script "/js/publicfunc.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+
+</head>
+<body>
+<div class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'center'">
+        <table id="oldmanagerpanel" >
+            <thead>
+            <tr>
+                <th data-options="field:'oldname',width:100,align:'center'">姓名
+                <th data-options="field:'oldsex',width:80,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    return getC(sex,value);
+                }">性别</th>
+                <th data-options="field:'oldtype',width:80,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    return getfigurename('客户类型',value);
+                }">类型</th>
+                <th data-options="field:'nation',width:80,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    return getC(nation,value);
+                }">民族</th>
+                <th data-options="field:'oldcardnum',width:200,align:'center'">身份证</th>
+                <th data-options="field:'oldtelnum',width:120,align:'center'">电话</th>
+                <th data-options="field:'oldaddress',width:270,align:'center'">家庭住址</th>
+
+                <!--<th data-options="field:'usertel',width:100,align:'center'">求助时间</th>-->
+                <th data-options="field:'ro',width:180,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    var str='<div></div>';
+                    str=$(str).append('<button onclick=&quot;updateO('+rowData.oldid+')&quot;>查看</button>'
+                    +'<p class=&quot;hide&quot; id=&quot;t'+rowData.oldid+'&quot;>'+JSON.stringify(rowData)+'</p>');
+                    return str.html();
+                }">操作</th>
+                <!--<th data-options="field:'time',width:150,align:'center',formatter:dateformatter,align:'center'">注册时间</th>-->
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div id="oldpaneltb" style="padding:5px;height:34px;;vertical-align: middle;line-height: 34px;">
+        <div class="lf">姓名: <input class="easyui-textbox keyword"  style="width:120px">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div class="lf" style="height: 34px"><div class="tbbtn find">搜索</div></div></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/divisionmanage.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+</head>
+<body>
+<div id="divisionmanagerlayout" class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'center'">
+        <table id="divisionmanagerpanel" >
+            <thead>
+            <tr>
+                <th data-options="field:'text',width:300,formatter:function(val,rowData,rowIndex){
+                     var signaturepath=rowData.signaturepath;
+                     return '<span signaturepath=&quot;'+signaturepath+'&quot; class=&quot;treefunc&quot;>' + val + '</span>';
+                }">区划树</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div data-options="region:'east',split:true,collapsed:true" title="详细信息" style="width:300px;">
+        <div style="padding:10px 10px 10px 10px;">
+            <form id="divisioninfoform" method="post">
+                <table class="formtable" style="width: 100%;">
+                    <tr>
+                        <td>区划编码:</td>
+                        <td><input class="easyui-textbox"  type="text" name="dvcode" data-options="required:true"></td>
+                    </tr>
+                    <tr>
+                        <td>区划名称:</td>
+                        <td><input class="easyui-textbox" type="text" name="dvname" data-options="required:true"></td>
+                    </tr>
+                    <tr>
+                        <td>区划级别:</td>
+                        <td>
+                            <input class="easyui-textbox" name="dvrank" >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>节点标识:</td>
+                        <td>
+                            <input class="easyui-textbox"  name="dvflag">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>区划全称:</td>
+                        <td>
+                            <input class="easyui-textbox" name="totalname" >
+                        </td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>
+                            <input type="text" name="dvocode" style="display: none;">
+                            <input type="text" name="dvhigh" style="display: none;">
+                            <!--<input type="text" name="value" style="display: none;">-->
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div style="text-align:center;padding:5px" id="divisionformbtns">
+             <span class="hide"><a  class="easyui-linkbutton save">保存</a>
+            <!--<a  class="easyui-linkbutton del">删除</a>-->
+            <a  class="easyui-linkbutton new"  >新增</a></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

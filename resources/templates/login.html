@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>登录</title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% style "/js/easyui/themes/bootstrap/easyui.css" %}
+    {% style "/css/main.css" %}
+    <script type="text/javascript">
+        function keyDown(e) {
+            var ev= window.event||e;
+            if (ev.keyCode == 13) {
+                $('form').form('submit', {
+                    url:'/login',
+                    onSubmit: function(){
+                    },
+                    success:function(data){
+                        var info = eval('('+($(data).find('pre').text())+')');
+                        if(info.success){
+                            console.log(info.user)
+                            $.messager.alert('登录','登录成功!');
+                            location.href='/';
+
+                        }else{
+                            $.messager.alert('登录','登录失败!');
+                        }
+
+//                        $('#planmanagerpanel').datagrid('reload');
+//                        $('#newplanwin').dialog('close');
+                    }
+                });
+            }
+        }
+        $(document).ready(function(){
+            $("#submit").click(function(){
+                $('form').form('submit', {
+                    url:'/login',
+                    onSubmit: function(){
+                    },
+                    success:function(data){
+                        var info = eval('('+($(data).find('pre').text())+')');
+                        if(info.success){
+                            console.log(info.user)
+                            $.messager.alert('登录','登录成功!');
+                            location.href='/';
+
+                        }else{
+                            $.messager.alert('登录','登录失败!');
+                        }
+
+//                        $('#planmanagerpanel').datagrid('reload');
+//                        $('#newplanwin').dialog('close');
+                    }
+                });
+            })
+        })
+    </script>
+</head>
+<body style=" background:url(../img/login/bg_login.png) no-repeat;background-size: cover;">
+    <div id="outer">
+        <div id="middle">
+            <div class="login" >
+                <div  class="login_header"><img src="../img/login/logo_login.png"><span style="margin-left: 20px">呼叫中心系统</span></div>
+                <div class="login_form">
+                    <div class="login_left lf" ></div>
+                    <div class="login_right lf">
+                        <form>
+                            <div class="login_title">用户登录</div>
+                            <div style="margin-top: 20px;">
+                            <input class="text-basic" value="用户名" onblur="if (value=='') {value='用户名'};"
+                                   onfocus="if(value=='用户名') {value=''};" name="loginname" type="text">
+                            <br>
+                            <br>
+
+                            <input class="text-basic" name="pwd" type="password" value="密码" onblur="if (value=='') {value='密码'};"
+                                   onfocus="if(value=='密码') {value=''};" onkeydown="keyDown(event)" >
+                            </div>
+                            <div style="margin-top: 20px;"><div class="btn lf" style="background-color: #ff6262" id="submit">登录</div>
+                                <div class="btn lf" style="margin-left: 10px;background-color: #9a9b9c">取消</div></div>
+
+
+                        </form>
+                    </div>
+                </div>
+                <div style="padding-left: 10px;"><img src="../img/login/login_dy.png"></div>
+            </div>
+            <div  class="footer" style="position: absolute;">
+                <span>技术支持：浙江海予信息科技有限公司</span><span style="margin-left: 40px;margin-right: 40px">公司官网：www.hvit.com</span>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+</body>
+</html>
+

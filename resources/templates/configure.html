@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    {% script "/js/easyui/jquery.min.js" %}
+    {% script "/js/easyui/jquery.easyui.min.js" %}
+    {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
+    {% script "/js/configuremanage.js" %}
+    {% style "/js/easyui/themes/metro/easyui.css" %}
+    {% style "/css/main.css" %}
+</head>
+<body>
+<div id="configuremanagerlayout" class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'center'">
+        <table id="configuremanagerpanel" >
+            <thead>
+            <tr>
+                <th data-options="field:'text',width:300,formatter:function(val,rowData,rowIndex){
+                     var signaturepath=rowData.signaturepath;
+                     return '<span signaturepath=&quot;'+signaturepath+'&quot; class=&quot;treefunc&quot;>' + val + '</span>';
+                }">枚举树</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div data-options="region:'east',split:true,collapsed:true" title="详细信息" style="width:300px;">
+        <div style="padding:10px 10px 10px 10px;">
+            <form id="configureinfoform" method="post">
+                <table class="formtable" style="width: 100%;">
+                    <tr>
+                        <td>枚举名称:</td>
+                        <td><input class="easyui-textbox"  type="text" name="cname" data-options="required:true"></td>
+                    </tr>
+                    <tr>
+                        <td>枚举值:</td>
+                        <td><input class="easyui-textbox" type="text" name="cvalue" data-options="required:true"></td>
+                    </tr>
+                    <!--<tr>-->
+                        <!--<td>枚举类型:</td>-->
+                        <!--<td>-->
+                            <!--<input class="easyui-textbox" name="cident" data-options="required:true" >-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <tr>
+                        <td>节点标识:</td>
+                        <td>
+                            <input class="easyui-textbox"  name="cstate">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>枚举排序:</td>
+                        <td>
+                            <input class="easyui-textbox" name="csort">
+                        </td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td>
+                            <input type="text" name="cid" style="display: none;">
+                            <input class="easyui-textbox" name="cident" >
+                            <input class="easyui-textbox" name="text" >
+                            <!--<input type="text" name="dvhigh" style="display: none;">-->
+                            <!--<input type="text" name="value" style="display: none;">-->
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div style="text-align:center;padding:5px" id="configureformbtns">
+             <span class="hide"><a  class="easyui-linkbutton save">保存</a>
+            <a  class="easyui-linkbutton del">删除</a>
+            <a  class="easyui-linkbutton new"  >新增</a></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
