@@ -5,14 +5,13 @@
  * Time: 下午4:07
  * To change this template use File | Settings | File Templates.
  */
-var oldid,sex,nation;
+var oldid;
 $(document).ready(function(){
     $('#oldpaneltb .find').click(function(){
         $('#oldmanagerpanel').datagrid('load',
             {keyword:$('#oldpaneltb .keyword').val()});
     });
-    sex = getcombo("性别");
-    nation = getcombo("民族");
+
 //    political = getcombo("政治面貌");
 //    education = getcombo("文化程度");
 //    marriage = getcombo
@@ -102,16 +101,4 @@ function getCon(){
             }
         }
     })
-}
-function getC(obj,value){
-    var name = "";
-    console.log(obj.length)
-    for(var i=0;i<obj.length;i++){
-        if(obj[i].id==value){
-            name = obj[i].text;
-        }else{
-            console.log(value) ;
-        }
-    }
-    return name;
 }

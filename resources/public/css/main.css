@@ -451,10 +451,62 @@ body{
     cursor: pointer;
     color: #0c88d6;
 }
+.sy{
+    margin-top: 55px;
+    width: 250px;
+    float: left;
+    background-color: #ffffff;
+    margin-left: 20px;
+    border:1px solid #e2e2e2;
+    /*margin-top: 5px;*/
+}
+.sy_header{
+    height: 36px;
+    width: 240px;
+    margin-top:30px;
+    margin-left: -10px;
+    vertical-align: middle;
+    line-height: 36px;
+    color: #ffffff;
+    font-size: 16px;
+}
+.sy_header img{
+    margin-left: 30px;
+    vertical-align: middle;
+}
+.sy_header span{
+    margin-left: 5px;
+    vertical-align: middle;
+    /*line-height: 36px;*/
+}
+.sy_ic{
+    width: 10px;
+    height: 10px;
+    margin-left: -10px
+}
+.sy_content{
+    height: 154px;
+    margin-top: 30px;
+}
+.sy_bottom{
+    height: 60px;
+    width: 240px;
+    padding-right: 10px;
+    text-align: right;
+    line-height: 60px;
+    background-color: #f4f4f4;
+    font-size: 20px;
+}
 /*.ic span{*/
     /*margin-top: 20px;*/
 /*}*/
-
+#flowers a {
+    background: url(../img/ic/ic_gray_flower.png) no-repeat;
+    display: inline-block;
+    height: 16px;
+    text-indent: -999em;
+    width: 16px;
+}
 
 
 

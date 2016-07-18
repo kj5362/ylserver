@@ -5,83 +5,83 @@
     {% script "/js/easyui/jquery.min.js" %}
     {% script "/js/easyui/jquery.easyui.min.js" %}
     {% script "/js/easyui/locale/easyui-lang-zh_CN.js" %}
-    {% script "/js/home.js" %}
+    <!--{% script "/js/home.js" %}-->
     {% style "/js/easyui/themes/bootstrap/easyui.css" %}
     {% style "/css/main.css" %}
 </head>
 <body>
-<div class="easyui-layout" style="width: 100%;height: 100%;min-width: 1344px;">
-    <div data-options="region:'north'" style="background-color: #f4f4f4;height: 70px;">
-        <div id="logpaneltb" style="padding:5px;height:auto;vertical-align: middle;height: 34px;background-color: #ffffff;margin: 10px;border-radius: 8px">
-            快速搜索: <input class="easyui-textbox keyword"  style="width:120px">&nbsp;
-            <input class="easyui-datetimebox bgtime" style="width:100px;">
-            <input class="easyui-datetimebox edtime" style="width:100px;">
-            <a class="easyui-linkbutton findlog" >&nbsp;查&nbsp;询&nbsp;</a>&nbsp;
-        </div>
-    </div>
+<div class="easyui-layout"  data-options="fit:true">
+    <!--<div data-options="region:'north'" style="background-color: #f4f4f4;height: 70px;">-->
+        <!--<div id="logpaneltb" style="padding:5px;height:auto;vertical-align: middle;height: 34px;background-color: #ffffff;margin: 10px;border-radius: 8px">-->
+            <!--快速搜索: <input class="easyui-textbox keyword"  style="width:120px">&nbsp;-->
+            <!--<input class="easyui-datetimebox bgtime" style="width:100px;">-->
+            <!--<input class="easyui-datetimebox edtime" style="width:100px;">-->
+            <!--<a class="easyui-linkbutton findlog" >&nbsp;查&nbsp;询&nbsp;</a>&nbsp;-->
+        <!--</div>-->
+    <!--</div>-->
     <div data-options="region:'center'" border="false" style="background-color: #f4f4f4">
-        <div style="width: 270px;float: left;background-color: #ffffff;margin-left: 20px;border:1px solid #e2e2e2;margin-top: 5px;">
-            <div style="height: 36px;width: 260px;margin-top:30px;background:url(../img/bg_green.png);margin-left: -10px">
-
+        <div class="sy">
+            <div class="sy_header" style="background:url(../img/bg_green.png);">
+                <img src="../img/ic/ic_tel.png"><span>来电</span>
             </div>
-            <div style="width: 10px;height: 10px;background: url(../img/ic/ic_green.png)no-repeat;margin-left: -10px"></div>
-            <div style="height: 204px;margin-top: 30px;">
+            <div class="sy_ic" style="background: url(../img/ic/ic_green.png)no-repeat;"></div>
+            <div class="sy_content">
                 <ul>
-                    <li style="font-size: 16px;">今日：43134条</li>
-                    <li style="font-size: 16px;">本月：4566545条</li>
-                    <li style="font-size: 16px;">当年:12321313条</li>
+                    <li style="font-size: 16px;">今日：0条</li>
+                    <li style="font-size: 16px;">本月：0条</li>
+                    <li style="font-size: 16px;">当年：0条</li>
                 </ul>
             </div>
-            <div style="height: 60px;width: 260px;padding-right: 10px;text-align: right;line-height: 60px;background-color: #f4f4f4;font-size: 20px;">
-                总量：23521626条
+            <div class="sy_bottom">
+                总量：0条
             </div>
         </div>
-        <div style="width: 270px;float: left;background-color: #ffffff;margin-left: 20px;border:1px solid #e2e2e2;margin-top: 5px;">
-            <div style="height: 36px;width: 260px;margin-top:30px;background:url(../img/bg_yellow.png);margin-left: -10px">
-
+        <div class="sy">
+            <div class="sy_header" style="background:url(../img/bg_yellow.png);">
+                <img src="../img/ic/ic_work.png"><span>工单</span>
             </div>
-            <div style="width: 10px;height: 10px;background: url(../img/ic/ic_yellow.png)no-repeat;margin-left: -10px"></div>
-            <div style="height: 204px;margin-top: 30px;">
+            <div style="background: url(../img/ic/ic_yellow.png)no-repeat" class="sy_ic"></div>
+            <div class="sy_content">
                 <ul>
-                    <li style="font-size: 16px;">今日：43134条</li>
-                    <li style="font-size: 16px;">本月：4566545条</li>
-                    <li style="font-size: 16px;">当年:12321313条</li>
+                    <li style="font-size: 16px;">今日：0条</li>
+                    <li style="font-size: 16px;">本月：0条</li>
+                    <li style="font-size: 16px;">当年：3条</li>
                 </ul>
             </div>
-            <div style="height: 60px;width: 260px;padding-right: 10px;text-align: right;line-height: 60px;background-color: #f4f4f4;font-size: 20px;">
-                总量：23521626条
+            <div class="sy_bottom">
+                总量：3条
             </div>
         </div>
-        <div style="width: 270px;float: left;background-color: #ffffff;margin-left: 20px;border:1px solid #e2e2e2;margin-top: 5px;">
-            <div style="height: 36px;width: 260px;margin-top:30px;background:url(../img/bg_pink.png);margin-left: -10px">
-
+        <div class="sy">
+            <div class="sy_header" style="background:url(../img/bg_pink.png);">
+                <img src="../img/ic/ic_old.png"><span>客户</span>
             </div>
-            <div style="width: 10px;height: 10px;background: url(../img/ic/ic_pink.png)no-repeat;margin-left: -10px"></div>
-            <div style="height: 204px;margin-top: 30px;">
+            <div style="background: url(../img/ic/ic_pink.png)no-repeat;" class="sy_ic"></div>
+            <div class="sy_content">
                 <ul>
-                    <li style="font-size: 16px;">今日：43134条</li>
-                    <li style="font-size: 16px;">本月：4566545条</li>
-                    <li style="font-size: 16px;">当年:12321313条</li>
+                    <li style="font-size: 16px;">今日：2条</li>
+                    <li style="font-size: 16px;">本月：12条</li>
+                    <li style="font-size: 16px;">当年：134条</li>
                 </ul>
             </div>
-            <div style="height: 60px;width: 260px;padding-right: 10px;text-align: right;line-height: 60px;background-color: #f4f4f4;font-size: 20px;">
-                总量：23521626条
+            <div class="sy_bottom">
+                总量：134条
             </div>
         </div>
-        <div style="width: 270px;float: left;background-color: #ffffff;margin-left: 20px;border:1px solid #e2e2e2;margin-top: 5px;">
-            <div style="height: 36px;width: 260px;margin-top:30px;background:url(../img/bg_blue.png);margin-left: -10px">
-
+        <div class="sy">
+            <div class="sy_header" style="background:url(../img/bg_blue.png);">
+                <img src="../img/ic/ic_service.png"><span>服务商</span>
             </div>
-            <div style="width: 10px;height: 10px;background: url(../img/ic/ic_blue.png)no-repeat;margin-left: -10px"></div>
-            <div style="height: 204px;margin-top: 30px;">
-                <ul>
-                    <li style="font-size: 16px;">今日：43134条</li>
-                    <li style="font-size: 16px;">本月：4566545条</li>
-                    <li style="font-size: 16px;">当年:12321313条</li>
-                </ul>
-            </div>
-            <div style="height: 60px;width: 260px;padding-right: 10px;text-align: right;line-height: 60px;background-color: #f4f4f4;font-size: 20px;">
-                总量：23521条
+            <div style="background: url(../img/ic/ic_blue.png)no-repeat;" class="sy_ic"></div>
+            <div class="sy_content">
+            <ul>
+                <li style="font-size: 16px;">今日：0条</li>
+                <li style="font-size: 16px;">本月：0条</li>
+                <li style="font-size: 16px;">当年：2条</li>
+            </ul>
+        </div>
+            <div class="sy_bottom">
+                总量：2条
             </div>
         </div>
     </div>

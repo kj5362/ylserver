@@ -22,10 +22,10 @@ $(document).ready(function(){
 //            console.log(1)
             var text = "<table style='width: 200px;' cellspacing='20px' border='0' cellspadding='0'>";
             $.each(data,function(i,n){
-//                if(n.checked){
+                if(n.checked){
                      text += "<tr><td class='tree'><div class='minetree' value='"+ n.funcid+"'>"+n.textold+
                         "</div><div class='leafs'></div></td></tr>"
-//                }
+                }
             });
             $(text).appendTo($('#menu'));
             $('.tree .minetree').each(function(i){
@@ -39,7 +39,7 @@ $(document).ready(function(){
                             node.addClass('cl');
                             $.each(data,function(i,n){
                                 console.log(i);
-//                                if(n.checked){
+                                if(n.checked){
                                     if(i==0){
                                         var str = "<div class='mineleaf' style='padding-top: 20px;' value='"+ n.value+"'>"+n.textold+"<hr></div>";
                                     }else{
@@ -51,7 +51,7 @@ $(document).ready(function(){
                                         $('iframe').attr('src', '/page?page='+n.value)
 //                                          alert(n.value)
                                     }).appendTo(node.parent().find('.leafs')) ;
-//                                }
+                                }
                             })
 
                         }
@@ -61,6 +61,7 @@ $(document).ready(function(){
             $(".tree").eq(0).click();
         }
     })
+    $('iframe').attr('src', '/page?page=about')
 })
 //退出
 function logout(){

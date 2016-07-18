@@ -22,7 +22,7 @@
                 <th data-options="field:'wid',width:160,align:'center'">工单编号
                 <th data-options="field:'oldtype',width:100,align:'center',formatter:function(value,rowData,rowIndex)
                 {
-                    return getfigurename('客户类型',value);
+                    return getC(type,value);
                 }">求助类型</th>
                 <th data-options="field:'dvname',width:100,align:'center'">求助区域</th>
                 <th data-options="field:'oldname',width:100,align:'center'">求助者姓名</th>
@@ -50,7 +50,7 @@
                     }
                     return str.html();
                 }">操作</th>
-                <!--<th data-options="field:'time',width:150,align:'center',formatter:dateformatter,align:'center'">注册时间</th>-->
+                <!--<th data-options="field:'time',width:150,align:'center',formatter:dateformatter,align:'center'">注册  时间</th>-->
             </tr>
             </thead>
         </table>
@@ -170,12 +170,19 @@
                 </tr>
                 <tr>
                     <td style="text-align: right">评价：</td>
-                    <td><input class='textbox' name='evaluate'>
+                    <td id="flowers">
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
                     </td>
                 </tr>
             </table>
+            <input style="display: none;" name='evaluate' id="evaluate">
             <input style="display: none;" name="wid">
             <input style="display: none;" name="oldid">
+            <input style="display: none;" name="orgid">
         </form>
     </div>
 </div>

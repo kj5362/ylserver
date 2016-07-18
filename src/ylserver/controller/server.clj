@@ -112,9 +112,9 @@
 (defn getwork [wid]
   (resp/json (db/getwork wid)))
 ;;新增回访记录
-(defn vwork [asstime price visitcontent evalute wid oldid req]
+(defn vwork [asstime price visitcontent evalute wid oldid orgid req]
   (let [time (Timestamp. (System/currentTimeMillis))]
-    (resp/json (db/vwork (Timestamp/valueOf asstime) (Integer/parseInt price) visitcontent evalute wid oldid time
+    (resp/json (db/vwork (Timestamp/valueOf asstime) (Integer/parseInt price) visitcontent evalute wid oldid time orgid
                    (:userid (:user (:session req)))))))
 ;;还原派单
 (defn restorep [wid req]
@@ -151,6 +151,7 @@
 ;;查看枚举类型
 (defn figuretype []
   (resp/json (db/figuretype)))
+
 
 
 

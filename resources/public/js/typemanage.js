@@ -5,44 +5,24 @@
  * Time: 下午3:06
  * To change this template use File | Settings | File Templates.
  */
+var dv;
 $(document).ready(function(){
-//地区树配置
-//    $("#addsh").combobox({
-//        url:'/divisions?dvrank=2&dvhigh=330000',
-//        method:'get',
-//        valueField: 'dvcode',
-//        textField: 'dvname',
-//        onSelect:function(record){
-//            $("#dvcode").val(record.dvcode);
-//            $('#adds').combobox({
-//                url:'/divisions?dvrank=3&dvhigh='+record.dvcode,
-//                method:'get',
-//                valueField: 'dvcode',
-//                textField: 'dvname',
-//                onSelect:function(record2){
-//                    $("#dvcode").val(record.dvcode);
-//                    $('#addx').combobox({
-//                        url:'/divisions?dvrank=4&dvhigh='+record2.dvcode,
-//                        method:'get',
-//                        valueField: 'dvcode',
-//                        textField: 'dvname',
-//                        onSelect:function(record3){
-//                            $("#dvcode").val(record.dvcode);
-//                            $('#addjd').combobox({
-//                                url:'/divisions?dvrank=5&dvhigh='+record3.dvcode,
-//                                method:'get',
-//                                valueField: 'dvcode',
-//                                textField: 'dvname',
-//                                onSelect:function(record4){
-//                                    $("#dvcode").val(record.dvcode);
-//                                }
-//                            })
-//                        }
-//                    })
-//                }
-//            })
-//        }
-//    })
+    $("#tt").tree({
+        url:"/divisionsbyuser",
+        text: 'text',
+        id: 'dvcode',
+        onBeforeLoad:function (row, params) {
+            console.log(row);
+            if (row) {
+                params.dvcode = row.dvcode;
+            }
+        },
+        onDblClick:function(node){
+            console.log(node)
+            dv = node.dvcode;
+            $('#typemanagerpanel').treegrid("reload");
+        }
+    })
     $("#wtid").combobox({
         url:"/types?parentid=T&depth=1",
         method:'get',
@@ -78,30 +58,30 @@ $(document).ready(function(){
             })
         }
     })
-    $('#typepaneltb .find').click(function(){
-        $('#typemanagerpanel').treegrid('load',{dvcode:$('#typepaneltb #dvcode').val()});
-    });
-//    $('#typepaneltb .add').click(function(){
-//        if($('#typepaneltb #dvcode').val()){
-//            $.ajax({
+//    //$('#typepaneltb .find').click(function(){
+//    //    $('#typemanagerpanel').treegrid('load',{dvcode:$('#typepaneltb #dvcode').val()});
+//    //});
+////    $('#typepaneltb .add').click(function(){
+////        if($('#typepaneltb #dvcode').val()){
+////            $.ajax({
+////
+////            })
+////        }else{
+////            alert("没有设置区划");
+////        }
 //
-//            })
-//        }else{
-//            alert("没有设置区划");
+////    });
+////获取用户地区
+//    $.ajax({
+//        url:'/session',
+//        success:function(data){
+//            console.log(data)
 //        }
-
-//    });
-//获取用户地区
-    $.ajax({
-        url:'/session',
-        success:function(data){
-            console.log(data)
-        }
-    })
+//    })
     $('#typemanagerpanel').treegrid({
         rownumbers: true,
         method: 'post',
-        toolbar:'#typepaneltb',
+        //toolbar:'#typepaneltb',
         url: '/types',
         treeField: 'text',
         idField: 'tid',
@@ -115,6 +95,7 @@ $(document).ready(function(){
                 params.parentid = row.tid;
                 params.depth = (row.depth+1);
             }
+            params.dvcode = dv;
 //            if($("#"))
 //                params.node = null;
 //            else ;

@@ -14,6 +14,9 @@
 </head>
 <body>
 <div id="usermanagerlayout" class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'west'" style="width:200px" title="选择地区">
+        <ul id="tt"></ul>
+    </div>
     <div data-options="region:'center'">
         <table id="usermanagerpanel" >
             <thead>
@@ -21,7 +24,7 @@
                 <th data-options="field:'username',width:100,align:'center'">用户名
                 <th data-options="field:'useraccount',width:100,align:'center'">登录名</th>
                 <th data-options="field:'rolename',width:100,align:'center'">角色</th>
-                <th data-options="field:'usertelnum',width:100,align:'center'">联系方式</th>
+                <th data-options="field:'usertel    num',width:100,align:'center'">联系方式</th>
                 <th data-options="field:'useraddress',width:100,align:'center'">联系地址</th>
                 <th data-options="field:'dvname',width:100,align:'center'">所属区划</th>
                 <th data-options="field:'usertime',width:140,align:'center',formatter:dateformatter">创建时间</th>
@@ -112,10 +115,10 @@
                     <td>联系地址:</td>
                     <td><input class="easyui-validatebox textbox"  name="useraddress" data-options="required:true" ></td>
                 </tr>
-                <tr>
-                    <td>所属区划:</td>
-                    <td><input class="easyui-combotree" style="width: 173px" name="dvcode" id="dvcode" ></td>
-                </tr>
+                <!--<tr>-->
+                    <!--<td>所属区划:</td>-->
+                    <td><input style="display: none" name="dvcode" ></td>
+                <!--</tr>-->
                 <tr>
                     <td>所属角色:</td>
                     <td><input class="easyui-combobox" name="roleid" id="role"></td>

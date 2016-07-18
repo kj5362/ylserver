@@ -22,7 +22,25 @@
                 <th data-options="field:'orgtelnum',width:100,align:'center'">联系电话</th>
                 <th data-options="field:'orgservice',width:270,align:'center'">服务范围</th>
                 <th data-options="field:'orgtime',width:140,align:'center',formatter:dateformatter">注册时间</th>
-                <!--<th data-options="field:'usertel',width:100,align:'center'">求助时间</th>-->
+                <th data-options="field:'evaluate',width:100,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    var str = '';
+                    if(value){
+                        var n = Math.floor(value);
+                        var m = Math.floor(5-value);
+                        for(var i=0;i<n;i++){
+                            str += '<img src=&quot;/img/ic/ic_red_flower.png&quot; title=&quot;分数：'+value+'&quot;>';
+                        }
+                        if(value-n>0)
+                            str += '<img src=&quot;/img/ic/ic_flower.png&quot; title=&quot;分数：'+value+'&quot;>';
+                        for(var i=0;i<m;i++){
+                            str += '<img src=&quot;/img/ic/ic_gray_flower.png&quot; title=&quot;分数：'+value+'&quot;>';
+                        }
+                    }else{
+                        return '暂无';
+                    }
+                    return str;
+                }">综合评价</th>
                 <th data-options="field:'ro',width:180,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';

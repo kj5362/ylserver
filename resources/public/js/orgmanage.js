@@ -18,38 +18,53 @@ $(document).ready(function(){
     }) ;
     if($("#type").text()){
         var data = JSON.parse($("#type").text());
-//        console.log(data)
-        $.ajax({
-            url:'/divisions?dvrank=2&dvhigh=330000',
-            success:function(info){
-                $('#addsh').combobox('loadData',info).combobox('select',data.dvcode.substring(0,4)+'00');
-                $.ajax({
-                    url:'/divisions?dvrank=3&dvhigh='+data.dvcode.substring(0,4)+'00',
-                    success:function(info){
-                        $('#adds').combobox('loadData',info).combobox('select',data.dvcode.substring(0,6));
-                        $.ajax({
-                            url:'/divisions?dvrank=4&dvhigh='+data.dvcode.substring(0,6),
-                            success:function(info){
-                                $('#addx').combobox('loadData',info).combobox('select',data.dvcode.substring(0,9));
-                                $.ajax({
-                                    url:'/divisions?dvrank=5&dvhigh='+data.dvcode.substring(0,9),
-                                    success:function(info){
-                                        $('#addjd').combobox('loadData',info).combobox('select',data.dvcode);
-                                    }
-                                })
-                            }
-                        })
-                    }
-                })
-            }
-
-        })
         data.orgtype = getfigurename("机构类型",data.orgtype);
+//        console.log(data)
         $('.form1').form('load',data);
+        var addsh = getdvname(data.dvcode.substring(0,4)+'00');
+        $('#addsh').combobox('setValue',data.dvcode.substring(0,4)+'00');
+        $('#addsh').combobox('setText',addsh);
+        var adds = getdvname(data.dvcode.substring(0,6));
+        $('#adds').combobox('setValue',data.dvcode.substring(0,6));
+        $('#adds').combobox('setText',adds);
+        var addx = getdvname(data.dvcode.substring(0,9));
+        $('#addx').combobox('setValue',data.dvcode.substring(0,9));
+        $('#addx').combobox('setText',addx);
+        var addjd = getdvname(data.dvcode);
+        $('#addjd').combobox('setValue',data.dvcode);
+        $('#addjd').combobox('setText',addjd);
+//        $.ajax({
+//            url:'/divisions?dvrank=2&dvhigh=330000',
+//            success:function(info){
+//                $('#addsh').combobox('loadData',info).combobox('select',data.dvcode.substring(0,4)+'00');
+//                $.ajax({
+//                    url:'/divisions?dvrank=3&dvhigh='+data.dvcode.substring(0,4)+'00',
+//                    success:function(info){
+//                        $('#adds').combobox('loadData',info).combobox('select',data.dvcode.substring(0,6));
+//                        $.ajax({
+//                            url:'/divisions?dvrank=4&dvhigh='+data.dvcode.substring(0,6),
+//                            success:function(info){
+//                                $('#addx').combobox('loadData',info).combobox('select',data.dvcode.substring(0,9));
+//                                $.ajax({
+//                                    url:'/divisions?dvrank=5&dvhigh='+data.dvcode.substring(0,9),
+//                                    success:function(info){
+//                                        $('#addjd').combobox('loadData',info).combobox('select',data.dvcode);
+//                                    }
+//                                })
+//                            }
+//                        })
+//                    }
+//                })
+//            }
+//
+//        })
+        data.orgtype = getfigurename("机构类型",data.orgtype);
+
 //        $("input[name=orgid]").val(data.orgid);
         orgid=data.orgid;
         getFile();
         getItem();
+        $("input").attr('readonly','true');
     }
     $('#orgmanagerpanel').datagrid({
         singleSelect: true,
@@ -125,7 +140,7 @@ $(document).ready(function(){
         $("#itemwin input").val('');
         $("#itemwin input[name=orgid]").val(data.orgid);
         $('#updateitembtn').linkbutton('disable');
-        $('#saveitembtn').linkbutton('enable');
+        $('#additembtn').linkbutton('enable');
         $('#itemwin').dialog('open');
     })
     //服务商弹窗输入框里数据变动事件

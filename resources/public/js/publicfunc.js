@@ -5,6 +5,10 @@
  * Time: 下午2:55
  * To change this template use File | Settings | File Templates.
  */
+var sex,nation,type;
+sex = getcombo("性别");
+nation = getcombo("民族");
+type = getfigure("客户类型");
 function timeFormatter2() {
     var now = new Date();
     var year = now.getFullYear();       //年
@@ -72,6 +76,22 @@ function getfigurename (ident,value){
     })
     return name;
 }
+function getfigure (ident){
+    var name = "";
+    $.ajax({
+        url:encodeURI('figures?cident='+ident),
+        async:false,
+        success:function(data){
+            console.log(data)
+            if(data)
+                name = data;
+            else{
+                name = "无";
+            }
+        }
+    })
+    return name;
+}
 function getcombo (ident){
     var name = "";
     $.ajax({
@@ -102,6 +122,18 @@ function getcomboname (ident,value){
             }
         }
     })
+    return name;
+}
+function getC(obj,value){
+    var name = "";
+    console.log(obj.length)
+    for(var i=0;i<obj.length;i++){
+        if(obj[i].id==value){
+            name = obj[i].text;
+        }else{
+            console.log(value) ;
+        }
+    }
     return name;
 }
 

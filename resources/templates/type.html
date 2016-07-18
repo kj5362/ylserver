@@ -12,6 +12,9 @@
 </head>
 <body>
 <div id="typemanagerlayout" class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'west'" style="width:200px" title="选择地区">
+        <ul id="tt"></ul>
+    </div>
     <div data-options="region:'center'">
         <table id="typemanagerpanel" >
             <thead>
@@ -55,7 +58,7 @@
             </form>
         </div>
         <div style="text-align:center;padding:5px" id="typeformbtns">
-             <span class="hide"><a  class="easyui-linkbutton save">保存</a>
+             <span class="hide"><a class="easyui-linkbutton save">保存</a>
             <!--<a  class="easyui-linkbutton del">删除</a>-->
             <a  class="easyui-linkbutton new"  >新增</a></span>
         </div>

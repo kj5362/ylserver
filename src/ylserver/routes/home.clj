@@ -33,7 +33,7 @@
   ;;获取用户信息
   (GET "/session" req (system/session req))
   ;;查询用户
-  (ANY "/users" [page rows keyword] (system/getusers page rows keyword ))
+  (ANY "/users" [page rows keyword dvcode] (system/getusers page rows keyword dvcode))
   ;;用户登录
   (ANY "/login" [loginname pwd :as req] (system/loginuser loginname pwd req))
   ;;新增用户信息
@@ -131,8 +131,8 @@
   ;;查看工单信息
   (ANY "/work" [wid] (server/getwork wid))
   ;;增加回访记录
-  (ANY "/vwork" [asstime price visitcontent evaluate wid oldid :as req]
-    (server/vwork asstime price visitcontent evaluate wid oldid req))
+  (ANY "/vwork" [asstime price visitcontent evaluate wid oldid orgid :as req]
+    (server/vwork asstime price visitcontent evaluate wid oldid orgid req))
   ;;派单还原
   (ANY "/restorep" [wid :as req] (server/restorep wid req))
 ;  ;;回访还原
@@ -151,6 +151,7 @@
 
   ;;查看区划树
   (ANY "/divisions" [dvrank dvhigh] (system/getdivisions dvrank dvhigh))
+  (ANY "/divisionsbyuser" [:as req dvcode] (system/getdivisionsbyuser req dvcode))
 
   (ANY "/division" [dvcode] (system/getdivision dvcode))
   ;;新增区划
@@ -182,5 +183,13 @@
   (ANY "/delfigure" [cid :as req] (system/delfigure cid req))
   ;;查询操作日志
   (ANY "/logs" [keyword bgtime edtime page rows] (system/getlogs keyword bgtime edtime page rows))
+
+  ;;首页统计
+  ;;工单统计
+  (ANY "/countwork" [:as req] (system/countwork [req]))
+  ;;客户统计
+  (ANY "/countold" [:as req] (system/countold [req]))
+  ;;服务商统计
+  (ANY "/countorg" [:as req] (system/countorg [req]))
   )
 

@@ -15,6 +15,6 @@
 (defn start-cleanup-job! []
   (future
     (loop []
-      (clear-expired-sessions)
-;      (Thread/sleep half-hour)
+;      (clear-expired-sessions)
+      (Thread/sleep half-hour)
       (recur))))

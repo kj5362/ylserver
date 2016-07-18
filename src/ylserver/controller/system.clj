@@ -16,10 +16,10 @@
 
 
 ;;用户列表
-(defn getusers [page rows keyword]
+(defn getusers [page rows keyword dvcode]
   (let [p (if (nil? page) page (Integer/parseInt page))
         r (if (nil? rows) rows (Integer/parseInt rows))
-        results (db/getusers keyword)
+        results (db/getusers keyword dvcode)
         c (count results)]
     (if (nil? p)
       (resp/json results)
@@ -176,6 +176,11 @@
 ;;获取区划信息
 (defn getdivision [dvcode]
   (resp/json (db/getdivision dvcode)))
+;;用户地区树
+(defn getdivisionsbyuser [req dvcode]
+  (let [dvhigh (if (== 1 (:roleid (:user (:session req)))) "000000"  (:dvcode (:user (:session req))))
+        dv (if (nil? dvcode)(db/getdivisions nil dvhigh) (db/getdivisions nil dvcode))]
+    (resp/json (map #(dvtreeformat %) dv))))
 ;;新增区划信息
 (defn adddivision [dvcode dvrank dvflag dvname totalname dvhigh dvocode req]
   (if (> (count (db/getdivisions (- (Integer/parseInt dvrank) 1) dvocode)) 0)
@@ -214,3 +219,16 @@
 ;;删除枚举信息
 (defn delfigure [cid req]
   (resp/json (db/delfigure cid (:userid (:user (:session req))))))
+;;工单统计
+(defn countwork [req]
+  (let [dvcode (:dvcode (:user (:session req)))]
+    (resp/json db/countwork)))
+;;客户统计
+(defn countold [req]
+  (let [dvcode (:dvcode (:user (:session req)))]
+    (resp/json db/countold)))
+;;服务商统计
+(defn countorg [req]
+  (let [dvcode (:dvcode (:user (:session req)))]
+    (resp/json db/countorg)))
+

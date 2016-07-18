@@ -5,12 +5,29 @@
  * Time: 上午11:04
  * To change this template use File | Settings | File Templates.
  */
+var dv;
 $(document).ready(function(){
     $('#userpaneltb .finduser').click(function(){
         $('#usermanagerpanel').datagrid('load',{keyword:$('#userpaneltb .keyword').val(),
             group:$('#userpaneltb .group').combobox('getValue')});
 
     });
+    $("#tt").tree({
+        url:"/divisionsbyuser",
+        text: 'text',
+        id: 'dvcode',
+        onBeforeLoad:function (row, params) {
+            console.log(row);
+            if (row) {
+                params.dvcode = row.dvcode;
+            }
+        },
+        onDblClick:function(node){
+            console.log(node)
+            dv = node.dvcode;
+            $('#usermanagerpanel').datagrid("reload");
+        }
+    })
     $('#role').combobox({
         valueField: 'roleid',
         textField: 'rolename',
@@ -40,6 +57,7 @@ $(document).ready(function(){
                 params.page = options.pageNumber;
             else
                 params.page = 1;
+            params.dvcode = dv;
         }
 //        onClickRow:function(index, rowData){
 //            $('#userinfoform').form('load',rowData);
@@ -97,7 +115,7 @@ $(document).ready(function(){
 //    });
     $('#userpaneltb .newuser').click(function(){
         $('#newuserwin input').val('');//清空输入框数据
-        $("#dvcode").combotree('setValue','');
+        $('input[name=dvcode]').val(dv);
 //        $("#group").combobox('setValue','');
 //        $("#job").combobox('setValue','');
         $("#role").combobox('setValue','');
@@ -149,7 +167,7 @@ function updateP(id){
     $("#role").combobox('setValue','');
     var data = JSON.parse($("#t"+id).text());
     $('#newuserwin form').form('load',data);
-    $("#dvcode").combotree('setValue',data.dvname);
+    //$("#dvcode").combotree('setValue',data.dvname);
     $('#newuserwin').dialog({title:"变更用户信息"})
     $('#updateuserbtn').linkbutton('enable');//变更按钮启用
     $('#newuserwin').dialog('open');

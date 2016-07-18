@@ -306,10 +306,10 @@
         (with types
           (fields :tname))))))
 ;;新增回访记录
-(defn vwork [asstime price visitcontent evaluate wid oldid visittime userid]
+(defn vwork [asstime price visitcontent evaluate wid oldid visittime orgid userid]
   (let [money (- (:surplusmoney (first (select olds
                                          (where {:oldid oldid})))) price)]
-    (prn money)
+;    (prn money)
     (transaction
       (update works
         (set-fields {:asstime asstime :price price :visitcontent visitcontent :evaluate evaluate :visittime visittime
@@ -324,6 +324,13 @@
         (values {:logcontent "新增一条余额信息"}))
       (insert logs
         (values {:userid userid :logcontent "增加回访信息"}))
+      (let [evaluate (:evaluate (first (select works
+                                         (aggregate (avg :evaluate) :evaluate)
+                                         (where {:orgid orgid}))))]
+;        (prn evaluate)
+        (update orgs
+          (set-fields {:evaluate evaluate})
+          (where {:orgid orgid})))
       "true")))
 
 ;;还原派单
@@ -395,13 +402,14 @@
       (values {:userid id :logcontent "新增一条用户信息"}))
     "true"))
 ;;查询用户信息
-(defn getusers [keyword]
+(defn getusers [keyword dvcode]
   (select users
     (with roles
       (fields :rolename ))
     (with divisions
       (fields :dvname))
-    (where {:username [like (str "%" (if (nil? keyword)"" keyword) "%")]})))
+    (where {:username [like (str "%" (if (nil? keyword)"" keyword) "%")]
+            :dvcode [like (str "%" (if (nil? dvcode)"" dvcode) "%")]})))
 ;;用户信息登录
 (defn loginuser [name pwd]
   (select users
@@ -429,9 +437,11 @@
 (defn gettypes [parentid depth dvcode]
   (if (nil? depth)
     (select types
-      (where {:parentid parentid :isdel 0}))
+      (where {:parentid parentid :isdel 0
+              :dvcode [like (str "%" (if (nil? dvcode)"" dvcode) "%")]}))
     (select types
-      (where {:parentid parentid :depth depth :isdel 0}))))
+      (where {:parentid parentid :depth depth :isdel 0
+              :dvcode [like (str "%" (if (nil? dvcode)"" dvcode) "%")]}))))
 ;;查看服务类型
 (defn gettype [id]
   (select types
@@ -690,4 +700,85 @@
                                  c.range,c.oldtime,c.oldsex,c.oldbirthday,c.education,c.political,c.oldtype,c.oldweight,
                                  c.oldheight,c.marriage,c.disability,c.living,c.oldremark,c.nation,c.subsidymoney,c.surplusmoney);"
                []] :results)))
+
+;;首页统计
+;;统计工单
+(defn countwork [dvcode]
+  (with-db dboracle
+    (exec-raw ["select
+       sum(case
+             when trunc(sysdate) = trunc(t.wtime) then
+              1
+             else
+              0
+           end) as d,
+       sum(case
+             when t.wtime >= trunc(sysdate, 'MM') and
+                  t.wtime < last_day(sysdate) then
+              1
+             else
+              0
+           end) as m,
+       sum(case
+             when t.wtime >= trunc(sysdate, 'YYYY') then
+              1
+             else
+              0
+           end) as y,
+       count(*) as c
+  from workinfo t
+    " []] :results)))
+;;统计客户
+(defn countold [dvcode]
+  (with-db dboracle
+    (exec-raw ["select
+       sum(case
+             when trunc(sysdate) = trunc(t.oldtime) then
+              1
+             else
+              0
+           end) as d,
+       sum(case
+             when t.oldtime >= trunc(sysdate, 'MM') and
+                  t.oldtime < last_day(sysdate) then
+              1
+             else
+              0
+           end) as m,
+       sum(case
+             when t.oldtime >= trunc(sysdate, 'YYYY') then
+              1
+             else
+              0
+           end) as y,
+       count(*) as c
+  from oldinfo t
+    " []] :results)))
+;;统计服务商
+(defn countorg [dvcode]
+  (with-db dboracle
+    (exec-raw ["select
+       sum(case
+             when trunc(sysdate) = trunc(t.orgtime) then
+              1
+             else
+              0
+           end) as d,
+       sum(case
+             when t.orgtime >= trunc(sysdate, 'MM') and
+                  t.orgtime < last_day(sysdate) then
+              1
+             else
+              0
+           end) as m,
+       sum(case
+             when t.orgtime >= trunc(sysdate, 'YYYY') then
+              1
+             else
+              0
+           end) as y,
+       count(*) as c
+  from orginfo t
+    " []] :results)))
+
 

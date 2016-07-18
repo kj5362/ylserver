@@ -47,6 +47,16 @@ $(document).ready(function(){
         var wtid = gettypename(data.wtid);
         $('#tid').combobox('setValue',data.wtid);
         $('#tid').combobox('setText',wtid);
+        var str = '';
+        if(data.evaluate){
+            for(var i=0;i<data.evaluate;i++){
+                str += '<img src="/img/ic/ic_red_flower.png" title="分数：'+data.evaluate+'">';
+            }
+            for(var i=0;i<5-data.evaluate;i++){
+                str += '<img src="/img/ic/ic_gray_flower.png" title="分数：'+data.evaluate+'">';
+            }
+        }
+        $('#evaluate').html(str);
 //        $.ajax({
 //            url:'/divisions?dvrank=2&dvhigh=330000',
 //            success:function(info){
@@ -172,7 +182,21 @@ $(document).ready(function(){
 //
 //        })
     });
-
+    //评价
+    $('#flowers').on('click', 'a', function () {
+        console.log(this.innerHTML)
+        $('#evaluate').val(this.innerHTML);
+    }).on('mouseenter', 'a', function () {
+        setStar(this.innerHTML);
+    }).on('mouseleave', 'a', function () {
+        var level = $('#evaluate').val();
+        var $stars = $('#flowers > a');
+        if (level == '') {
+            $stars.css('background','url(../img/ic/ic_gray_flower.png) no-repeat');
+        } else {
+            setStar(level);
+        }
+    });
 
 
 })
@@ -211,6 +235,7 @@ function vwork(id){
     $('#vworkwin input').val('');//清空输入框数据
     $('#vworkwin input[name=wid]').val(id);
     $('#vworkwin input[name=oldid]').val(data.oldid);
+    $('#vworkwin input[name=orgid]').val(data.orgid);
     $('#vworkwin').dialog('open');
 }
 //查看工单详情
@@ -283,3 +308,11 @@ function loadO(id){
     $('form').form('load',info);
     $(".findbox").hide();
 }
+function setStar(level) {
+    $('#flowers a').css('background', 'url(../img/ic/ic_gray_flower.png) no-repeat');
+    console.log(level)
+    for (var i = 0; i < level; i++) {
+        $('#flowers a:eq('+i+')').css('background', 'url(../img/ic/ic_red_flower.png) no-repeat');
+    }
+}
+
