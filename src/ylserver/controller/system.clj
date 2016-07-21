@@ -222,13 +222,13 @@
 ;;工单统计
 (defn countwork [req]
   (let [dvcode (:dvcode (:user (:session req)))]
-    (resp/json db/countwork)))
+    (resp/json (first (db/countwork dvcode)))))
 ;;客户统计
 (defn countold [req]
   (let [dvcode (:dvcode (:user (:session req)))]
-    (resp/json db/countold)))
+    (resp/json (first (db/countold dvcode)))))
 ;;服务商统计
 (defn countorg [req]
   (let [dvcode (:dvcode (:user (:session req)))]
-    (resp/json db/countorg)))
+    (resp/json (first (db/countorg dvcode)))))
 
